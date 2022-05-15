@@ -10,6 +10,6 @@ When you run the program a GUI will appear:
 
 You can insert the variable you want to sort the list by.
 
-After that when you click "OK" the terminal will show you the sorted list.
+After that when you click "OK" the terminal will show you the sorted list with the relevant information.
 
 <img width="509" alt="Bildschirmfoto 2022-05-15 um 11 46 37" src="https://user-images.githubusercontent.com/75841587/168467008-8b30dc1d-c0a1-4131-bed9-4c56bb40e911.png">
