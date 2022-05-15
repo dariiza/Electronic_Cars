@@ -10,16 +10,17 @@ page = requests.get(URL)
 soup = BeautifulSoup(page.content, "html.parser")
 results = soup.find(class_="page-template__body")
 
-#GUI
+
 
 
 
 def main():
-    print("Unsorted car list")
-    print("")
-    car_list = get_car_list()
-    print(tabulate(car_list, headers=["Name", "Ranking", "Price"]))
-    print("")
+    #GUI
+    ROOT = tk.Tk()
+
+    ROOT.withdraw()
+    USER_INP = simpledialog.askstring(title="GUI",
+                                      prompt="Sort list by:(Name, Ranking, Price)")
     # chose "Name" to get the list sorted by name
     # "Price" to get it sorted by price
     # "Ranking" to get it sorted by ranking
@@ -73,11 +74,7 @@ def sort_list(param):
         print(tabulate(sorted_by_price, headers=["Name", "Ranking", "Price"]))
 
 
-ROOT = tk.Tk()
 
-ROOT.withdraw()
-USER_INP = simpledialog.askstring(title="GUI",
-                                  prompt="Sort list by:(Name, Ranking, Price)")
 
 
 
