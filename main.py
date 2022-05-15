@@ -1,12 +1,17 @@
 import requests
+import tkinter as tk
 from bs4 import BeautifulSoup
 from tabulate import tabulate
+from tkinter import simpledialog
 
 # definitions according to the website
 URL = "https://www.carwow.de/elektroauto"
 page = requests.get(URL)
 soup = BeautifulSoup(page.content, "html.parser")
 results = soup.find(class_="page-template__body")
+
+#GUI
+
 
 
 def main():
@@ -18,7 +23,8 @@ def main():
     # chose "Name" to get the list sorted by name
     # "Price" to get it sorted by price
     # "Ranking" to get it sorted by ranking
-    sort_list("Name")
+    sort_list(USER_INP)
+
 
 
 # function to print all cars on the website with information about name, price and ranking
@@ -40,6 +46,8 @@ def get_car_list():
         else:
             end_span = price_element.find(">")
             price_element = price_element[end_span + 1:15]
+        if not price_element_raw:
+            price_element = "currently not Available"
 
         if title_element is not None and ranking_element is not None:
             car_list.append((title_element.strip(), ranking_element.text, price_element.strip()))
@@ -58,11 +66,21 @@ def sort_list(param):
         sorted_by_name = sorted(car_list, key=lambda tup: tup[0])
         print(tabulate(sorted_by_name))
     elif param == "Ranking":
-        sorted_by_ranking = sorted(car_list, key=lambda tup: tup[1])
+        sorted_by_ranking = sorted(car_list, key=lambda tup: tup[1], reverse=True)
         print(tabulate(sorted_by_ranking))
     elif param == "Price":
         sorted_by_price = sorted(car_list, key=lambda tup: tup[2])
         print(tabulate(sorted_by_price, headers=["Name", "Ranking", "Price"]))
 
 
+ROOT = tk.Tk()
+
+ROOT.withdraw()
+USER_INP = simpledialog.askstring(title="GUI",
+                                  prompt="Sort list by:(Name, Ranking, Price)")
+
+
+
 main()
+
+
